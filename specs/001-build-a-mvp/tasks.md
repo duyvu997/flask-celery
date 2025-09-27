@@ -16,17 +16,17 @@
   - Created src/app.py with Swagger enabled
 
 ### Phase 3.3: Core Implementation
-- [ ] T008 [P] Comic model in src/models/comic.py
-- [ ] T009 [P] Novel model in src/models/novel.py
-- [ ] T010 [P] CrawlTask model in src/models/crawl_task.py
-- [ ] T011 [P] Celery worker setup in src/services/celery_worker.py
-- [ ] T012 [P] Flask API: trigger crawl endpoint in src/cli/crawl_api.py
-- [ ] T013 [P] Flask API: crawl status/result endpoint in src/cli/crawl_api.py
-- [ ] T014 [P] BeautifulSoup site parser for https://nettruyen3qb.com/ in src/lib/nettruyen_parser.py
-- [ ] T015 [P] Postgres integration for metadata in src/services/pg_service.py
-- [ ] T016 [P] File storage for images/text in src/services/storage_service.py
-- [ ] T017 [P] Configurable RAM usage/concurrency in src/services/worker_config.py
-- [ ] T018 [P] Basic authentication in src/cli/auth.py
+- [X] T008 [P] Comic model in src/models/comic.py
+- [X] T009 [P] Novel model in src/models/novel.py
+- [X] T010 [P] CrawlTask model in src/models/crawl_task.py
+- [X] T011 [P] Celery worker setup in src/services/celery_worker.py
+- [X] T012 [P] Flask API: trigger crawl endpoint in src/cli/crawl_api.py
+- [X] T013 [P] Flask API: crawl status/result endpoint in src/cli/crawl_api.py
+- [X] T014 [P] BeautifulSoup site parser for https://nettruyen3qb.com/ in src/lib/nettruyen_parser.py
+- [X] T015 [P] Postgres integration for metadata in src/services/pg_service.py
+- [X] T016 [P] File storage for images/text in src/services/storage_service.py
+- [X] T017 [P] Configurable RAM usage/concurrency in src/services/worker_config.py
+- [X] T018 [P] Basic authentication in src/cli/auth.py
 
 ## Parallel Execution Examples
 - T003 can run in parallel

@@ -2,6 +2,8 @@ from flask import Flask
 from flasgger import Swagger
 from src.models import db
 import os
+from src.api.crawl_api import crawl_api
+from src.api.auth import basic_auth
 
 app = Flask(__name__)
 
@@ -20,6 +22,10 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
 swagger = Swagger(app)
+
+# Register blueprints
+app.register_blueprint(crawl_api)
+app.register_blueprint(basic_auth)
 
 @app.route('/')
 def index():

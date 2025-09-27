@@ -2,6 +2,7 @@ flask
 celery
 psycopg2-binary
 beautifulsoup4
+requests
 flasgger
 black
 flake8

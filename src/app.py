@@ -1,7 +1,24 @@
 from flask import Flask
 from flasgger import Swagger
+from src.models import db
+import os
 
 app = Flask(__name__)
+
+# Example DB config from .env (adjust as needed)
+app.config['SQLALCHEMY_DATABASE_URI'] = (
+    'postgresql://{user}:{pw}@{host}:{port}/{db}'
+    .format(
+        user=os.getenv('DB_USER'),
+        pw=os.getenv('DB_PASS'),
+        host=os.getenv('DB_HOST'),
+        port=os.getenv('DB_PORT'),
+        db=os.getenv('DB_NAME')
+    )
+)
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db.init_app(app)
 swagger = Swagger(app)
 
 @app.route('/')

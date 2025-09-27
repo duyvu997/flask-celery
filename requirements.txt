@@ -1,0 +1,7 @@
+flask
+celery
+psycopg2-binary
+beautifulsoup4
+flasgger
+black
+flake8

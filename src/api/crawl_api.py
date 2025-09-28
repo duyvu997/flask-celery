@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from src.services.celery_worker import celery_app
+from src.lib.crawl_service import CrawlService
 
 crawl_api = Blueprint('crawl_api', __name__)
 
@@ -20,54 +20,29 @@ def trigger_crawl():
             site_url:
               type: string
               example: "https://nettruyen3qb.com/"
+            source_key:
+              type: string
+              example: "nettruyen"
     responses:
       200:
         description: Task started
         schema:
           type: object
           properties:
-            task_id:
-              type: string
-            status:
-              type: string
+            info:
+              type: object
+            chapters:
+              type: array
+              items:
+                type: string
       400:
-        description: site_url is required
+        description: site_url and source_key are required
     """
     data = request.get_json()
     site_url = data.get('site_url')
-    if not site_url:
-        return jsonify({'error': 'site_url is required'}), 400
-    task = celery_app.send_task('crawler.crawl_site', args=[site_url])
-    return jsonify({'task_id': task.id, 'status': 'started'})
-
-@crawl_api.route('/crawl/<task_id>', methods=['GET'])
-def crawl_status(task_id):
-    """
-    Get crawl task status/result
-    ---
-    tags:
-      - Crawl
-    parameters:
-      - in: path
-        name: task_id
-        required: true
-        type: string
-    responses:
-      200:
-        description: Task status/result
-        schema:
-          type: object
-          properties:
-            task_id:
-              type: string
-            status:
-              type: string
-            result:
-              type: string
-    """
-    result = celery_app.AsyncResult(task_id)
-    return jsonify({
-        'task_id': task_id,
-        'status': result.status,
-        'result': result.result if result.successful() else None
-    })
+    source_key = data.get('source_key')
+    if not site_url or not source_key:
+        return jsonify({'error': 'site_url and source_key are required'}), 400
+    service = CrawlService(source_key)
+    result = service.crawl_comic(site_url)
+    return jsonify(result)

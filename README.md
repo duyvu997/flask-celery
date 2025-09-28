@@ -75,6 +75,27 @@ requirements.txt         # Python dependencies
 - `POST /crawl` — Trigger crawl (JSON: `{ "site_url": "..." }`)
 - `GET /crawl/<task_id>` — Check crawl status/result
 
+# Pluggable Comic Source Crawler
+
+This feature enables maintainable, extensible crawling of comics from multiple sources using a pluggable design pattern.
+
+## Usage
+
+- Add new sources by subclassing `ComicSource` in `src/lib/sources/` and registering in `SourceFactory`.
+- Use `CrawlService` to crawl comics and chapters by source key.
+
+## Example
+
+```
+from src.lib.crawl_service import CrawlService
+service = CrawlService('nettruyen')
+result = service.crawl_comic('https://nettruyen3qb.com/truyen/some-comic')
+print(result['info'])
+print(result['chapters'])
+```
+
+See `src/lib/sources/USAGE.md` for more details.
+
 ## Development
 - Lint: `flake8 src/`
 - Format: `black src/`

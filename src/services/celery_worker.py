@@ -1,6 +1,8 @@
 from celery import Celery
 import os
 from dotenv import load_dotenv
+from src.lib.crawl_service import CrawlService
+from src.lib.source_factory import SourceFactory
 
 # Load environment variables
 load_dotenv(os.path.join(os.path.dirname(__file__), '../../.env'))
